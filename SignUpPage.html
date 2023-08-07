@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-image: url("loginBG01.jpg");
+            background-size: cover;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: aquamarine;
+
+        }
+
+        .container {
+            height: 80vh;
+            width: 80%;
+            background-color: rgba(0, 0, 0, 0.25);
+            border: 5px rgb(96, 159, 96) solid;
+            border-radius: 25px;
+        }
+
+        #hding01 {
+            font-size: 30px;
+
+        }
+
+        th,
+        td {
+            padding: 2px;
+        }
+
+        .container input,
+        #notImp select {
+            width: 20vw;
+            color: rgb(194, 194, 194);
+            font-size: 12pt;
+            background-color: rgb(239, 255, 249);
+            border: 2px rgb(0, 206, 0) solid;
+            padding: 2px;
+            border-radius: 5px;
+        }
+
+        #notImp {
+            height: 40%;
+            width: 90%;
+            background-color: rgba(193, 211, 193, 0.5);
+            border-radius: 20px;
+        }
+
+        #notImp td {
+            position: relative;
+            left: 15%;
+        }
+
+        #t1 {
+            position: relative;
+            left: 5vw;
+        }
+
+        #t1 input {
+            position: relative;
+            left: 10vw;
+        }
+
+        #dob01 {
+            width: 20vw;
+        }
+
+        th:hover {
+            text-shadow: 0px 0px 4px white;
+        }
+
+        input:hover,
+        #g01:hover,
+        #c01:hover {
+            box-shadow: 0px 0px 4px rgb(255, 255, 255);
+            background-color: rgb(250, 255, 253);
+            animation: inc 0.5s;
+            transform: scale(1.1);
+        }
+
+        input:focus {
+            box-shadow: 0px 0px 4px greenyellow;
+            background-color: rgb(200, 244, 227);
+        }
+
+        #t2 {
+            position: relative;
+            left: 8%;
+        }
+
+        @keyframes inc {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.1);
+            }
+
+
+        }
+
+        #sBtn {
+            background-color: greenyellow;
+            height: 40px;
+            width: 120px;
+            border-radius: 20px;
+        }
+
+        #sBtn:hover {
+            box-shadow: 0px 0px 12px white;
+        }
+
+        #sBtn:active {
+            background-color: rgb(209, 255, 140);
+            box-shadow: 0px 0px 0px white;
+        }
+    </style>
+    <script>
+        function submit() {
+            var chk01 = 0;
+
+            let userName = document.getElementById("userName").value;
+            let chk02 = 0;
+            for (let i = 0; i < userName.length; i++) {
+                if (userName[i] >= "a" && userName[i] <= "z" || userName[i] >= "A" && userName[i] <= "Z" || userName[i] == " ") {
+                    chk02++;
+                }
+            }
+            if (chk02 == userName.length) {
+                chk01++;
+            }
+            else {
+                alert("Invalid name");
+                document.getElementById("userName").value = "";
+            }
+
+
+            let chk03 = 0;
+            let s1, s2, s3, s4;
+            s1 = s2 = s3 = s4 = 0;
+            let password = document.getElementById("p01").value;
+            password = String(password);
+
+            if (password.length >= 8) {
+
+                for (let i = 0; i < password.length; i++) {
+
+                    if (password[i] >= "a" && password[i] <= "z") {
+                        s1++;
+                    }
+                    else if (password[i] >= "A" && password[i] <= "Z") {
+                        s2++;
+                    }
+                    else if (password[i] >= "!" && password[i] <= "/" || password[i] >= ":" && password[i] <= "@" || password[i] >= "[" && password[i] <= "`" || password[i] >= "{" && password[i] <= "~") {
+                        s3++;
+                    }
+                    else if (password[i] >= "0" && password[i] <= "9") {
+                        s4++;
+                    }
+                    else {
+                        console.log("Something went wrong", password[i], i);
+                    }
+                }
+            }
+            else {
+                alert("Password is too short");
+            }
+            if (s1 > 0 && s2 > 0 && s3 > 0 && s4 > 0) {
+                chk03++;
+            }
+            else {
+                alert("Try a strong password");
+                document.getElementById("p01").value = "";
+            }
+
+            let chk04 = 0;
+            let cPass = document.getElementById("p02").value;
+            if (cPass === password) {
+                chk04++;
+            }
+            else {
+                alert("Enter same password in conform password");
+                document.getElementById("p02").value = "";
+            }
+            let chk05, chk06, chk07;
+            chk05 = chk06 = chk07 = 0;
+            let gen = document.getElementById("g01").value;
+            if (gen === "M" || gen === "F" || gen === "O") {
+                chk05++;
+            }
+            else {
+                alert("Chose a gender");
+            }
+            let mail = document.getElementById("e01").value
+            if (chkMail(mail)) {
+                chk06++;
+            }
+            else {
+                alert("Enter proper e-mail");
+            }
+            let con = document.getElementById("c01").value
+            if (con == "can" || con == "amc" || con == "ind" || con == "ger" || con == "fre" || con == "aus") {
+                chk07++;
+            }
+            else {
+                alert("Choise a country");
+            }
+
+            chk01=chk02+chk03+chk04+chk05+chk06+chk07;
+            if(chk01>=6){
+                document.write("Sign up sccussful ");
+            }
+
+
+
+
+
+        }
+        function chkMail(str) {
+            str = String(str);
+            str = str.trim();
+            let n = str.length;
+            for (let i = 0; i < n; i++) {
+                //console.log("loop1",i);
+                if (str[i] == " ") {
+                    //console.log("loop1  false",i,str[i]);
+                    return false;
+                }
+            }
+            for (let i = 0; i < n; i++) {
+                //console.log("loop2",i);
+                if (!(str[i] >= "a" && str[i] <= "z" || str[i] >= "A" && str[i] <= "Z" || str[i] >= "0" && str[i] <= "9" || str[i] == "@" || str[i] == "_" || str[i] == ".")) {
+
+                    // console.log("loop2 false",i,str[i]); 
+                    return false;
+                }
+            }
+
+            var a, b;
+            a = b = 0;
+            const atTheRate = [], dot = [];
+
+            for (let i = 0; i < n; i++) {
+                //console.log("loop3", i);
+                if (str[i] == "@") {
+                    //console.log("loop3 @",i,str[i]);
+                    atTheRate[a++] = i;
+                }
+                if (str[i] == ".") {
+                    //console.log("loop3 .",i,str[i]);
+                    dot[b++] == i;
+                }
+            }
+            if ((atTheRate[0] == 0 && a != 1 && b != 1 && Number(atTheRate[0]) > Number(dot[0]))) {
+                //console.log("last chk");
+                return false;
+            }
+            return true;
+
+        }
+    </script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <center>
+        <form name="f1">
+            <div class="container">
+                <table width="80%" id="t1">
+                    <H1>Sign In</H1>
+                    <tr>
+                        <th title="Enter your user name" align="left">Name</th>
+                        <th> : </th>
+                        <td> <input type="text" name="userName" id="userName" placeholder="Enter your name "></td>
+                    </tr>
+                    <tr>
+                        <th align="left"
+                            title="Enter your password with atleast one specialCase, uppercase,lowercase and a number">
+                            Password</th>
+                        <th> : </th>
+                        <td><input type="password" name="p01" id="p01" placeholder="Password"></td>
+                    </tr>
+                    <tr>
+                        <th align="left" title="Enter your password again">Confirm password</th>
+                        <th> : </th>
+                        <td><input type="password" name="p02" id="p02" placeholder="re-enter your password"></td>
+                    </tr>
+                    <tr>
+                        <th title="Enter your user e-mail" align="left">E-Mail</th>
+                        <th> : </th>
+                        <td> <input type="email" name="e01" id="e01" placeholder="Enter your email"></td>
+                    </tr>
+                </table>
+                <br>
+                <div id="notImp">
+                    <table width="80%" id="t2">
+                        <br>
+                        <tr>
+                            <th align="left">
+                                Gender
+                            </th>
+                            <th> : </th>
+                            <td><select name="gender" id="g01">
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                    <option value="O">Others</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th align="left">Date of Birth</th>
+                            <th> : </th>
+                            <td><input type="date" name="dob" id="dob01"></td>
+
+                        </tr>
+                        <tr>
+                            <th align="left">Country</th>
+                            <th> : </th>
+                            <td>
+                                <select name="country" id="c01">
+                                    <option value="ind">India</option>
+                                    <option value="fre">Frence</option>
+                                    <option value="amc">America</option>
+                                    <option value="can">Canada</option>
+                                    <option value="ger">Germany</option>
+                                    <option value="aus">Australia</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </form>
+        <br>
+        <button onclick="submit()" id="sBtn">Sign In</button>
+    </center>
+
+</body>
+
+</html>
