@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: burlywood;
+            color: black;
+        }
+
+        #container {
+            display: flex;
+            justify-content: flex-end;
+            margin: auto;
+            align-items: center;
+            background-color: bisque;
+            height: 200px;
+            width: 70%;
+            border: 4px black solid;
+            border-radius: 20px;
+
+        }
+
+        #hours,
+        #mins,
+        #secs,
+        #mSecs {
+            text-align: center;
+            height: 150px;
+            width: 150px;
+            background-color: rgb(243, 225, 202);
+            border: 2px rgb(173, 146, 113) solid;
+            border-radius: 20px;
+            margin: 20px;
+        }
+
+        .btns {
+            height: 150px;
+            width: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .btns button {
+            height: 40px;
+            width: 100px;
+            border-radius: 20px;
+            background-color: beige;
+        }
+
+        #mSecs {
+            height: 100px;
+            width: 100px;
+            position: relative;
+            top: 25px;
+        }
+
+        .dot {
+            font-size: 100px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+            top: 25px;
+            font-weight: 10;
+        }
+
+        .val {
+            font-size: 75px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #hours .val,
+        #mins .val,
+        #secs .val {
+            font-size: 100px;
+            position: relative;
+            top: 30px;
+        }
+        button:hover{
+            background-color: rgb(255, 255, 239);
+        }
+        button:active{
+            background-color: rgb(255, 255, 209);
+        }
+    </style>
+    <script>
+        let ms = 0, s = 0, min = 0, hrs = 0;
+        let chk = 0;
+        function start() {
+            if (chk == 0) {
+                a = setInterval("update()", 10);
+            }
+        }
+        function stop() {
+            chk==0;
+            clearInterval(a);
+        }
+        function reset() {
+            chk = 0;
+            clearInterval(a);
+            ms = s = min = hrs = 0;
+            document.getElementById("ms").innerHTML = ms;
+            document.getElementById("s").innerHTML = s;
+            document.getElementById("min").innerHTML = min;
+            document.getElementById("hrs").innerHTML = hrs;
+        }
+
+        function update() {
+            ms++;
+            chk++;
+
+            if (ms > 99) {
+                s++;
+                ms /= 100;
+            }
+            if (s > 59) {
+                min++;
+                s /= 60;
+            }
+            if (min > 59) {
+                hrs++;
+                min /= 60;
+            }
+            document.getElementById("ms").innerHTML = ms;
+            document.getElementById("s").innerHTML = s;
+            document.getElementById("min").innerHTML = min;
+            document.getElementById("hrs").innerHTML = hrs;
+        }
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 align="center">STOP &NonBreakingSpace; WATCH</h1>
+    <div id="container">
+        <div class="btns">
+            <button onclick="start()">START</button>
+            <button onclick="reset()">RESET</button>
+            <button onclick="stop()">STOP</button>
+        </div>
+        <div id="hours">
+            <label class="val" id="hrs">00</label>
+        </div>
+        <label class="dot">.</label>
+        <div id="mins">
+            <label class="val" id="min">00</label>
+        </div>
+        <label class="dot">.</label>
+        <div id="secs">
+            <label class="val" id="s">00</label>
+        </div>
+        <label class="dot">.</label>
+        <div id="mSecs">
+            <label class="val" id="ms">00</label>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
