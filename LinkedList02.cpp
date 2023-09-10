@@ -42,6 +42,7 @@ int main()
         cout << "Press 7 : To delete from any position " << endl;
         cout << "Press 8 : To search for a value " << endl;
         cout << "Press 9 : To Sort " << endl;
+        cout << "Press 10 : To reverse list " << endl;
         cout << "Press 20 : To Exit " << endl;
         cout << "Enter your choise : ";
         cin >> chk;
