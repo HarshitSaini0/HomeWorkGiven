@@ -25,11 +25,12 @@ public:
     void show();
     void sort();
     void reverse();
+    LinkedList merg(LinkedList l);
 };
 
 int main()
 {
-    LinkedList l1;
+    LinkedList l1, l2, l3, l4;
     int val, pos, chk = 0;
     do
     {
@@ -42,7 +43,8 @@ int main()
         cout << "Press 7 : To delete from any position " << endl;
         cout << "Press 8 : To search for a value " << endl;
         cout << "Press 9 : To Sort " << endl;
-        cout << "Press 10 : To reverse list " << endl;
+        cout << "Press 10 : To Reverse the List " << endl;
+        cout << "Press 11: To enter two Lists and then merg them afterwords in a sorted manner " << endl;
         cout << "Press 20 : To Exit " << endl;
         cout << "Enter your choise : ";
         cin >> chk;
@@ -92,6 +94,28 @@ int main()
         case 10:
             l1.reverse();
             break;
+        case 11:
+
+            cout << "Enter number of elements in List one : ";
+            cin >> pos;
+            cout << "Enter values now : ";
+            for (int i = 0; i < pos; i++)
+            {
+                cin >> val;
+                l2.addAtBeg(val);
+            }
+            cout << "Enter number of elements in List second : ";
+            cin >> pos;
+            cout << "Enter values now : ";
+            for (int i = 0; i < pos; i++)
+            {
+                cin >> val;
+                l3.addAtBeg(val);
+            }
+            l4 = l2.merg(l3);
+            l4.show();
+            break;
+
         case 20:
             chk = 20;
             break;
@@ -305,4 +329,48 @@ void LinkedList::reverse()
         newPtr = ptr;
     }
     start = newPtr;
+}
+
+LinkedList LinkedList::merg(LinkedList l)
+{
+    Node *i, *j;
+    sort();
+    l.sort();
+    i = start;
+    j = l.start;
+    LinkedList result;
+    while (i != NULL || j != NULL)
+    {
+        if (j == NULL)
+        {
+            while (i != NULL)
+            {
+                result.addAtEnd(i->data);
+                i = i->next;
+            }
+        }
+        else if (i == NULL)
+        {
+            while (j != NULL)
+            {
+                result.addAtEnd(j->data);
+                j = j->next;
+            }
+        }
+        else
+        {
+            if (i->data >= j->data)
+            {
+                result.addAtEnd(j->data);
+                j = j->next;
+            }
+            else if (j->data > i->data)
+            {
+
+                result.addAtEnd(i->data);
+                i = i->next;
+            }
+        }
+    }
+    return result;
 }
